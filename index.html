@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Net Effective Rent Caluclator</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Calculate your net effective rent, quickly and easily.">
+  <style>
+    body,
+    html {
+      margin: 0;
+      padding: 0;
+      font-size: 100%;
+      font-family: monospace;
+      color: #520;
+      background: url(bananas.png);
+    }
+
+    .fill {
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+    }
+
+    .gutter {
+      margin: 0 auto;
+      padding: 1rem 2rem 2rem 2rem;
+      flex: 1 auto;
+      max-width: 28rem;
+      background: #fffef3;
+      border: 1px solid #b3d5d1;
+      border-radius: 0.25rem;
+      box-shadow: 0px 8px 20px -8px #90b4b1;
+    }
+
+    input {
+      width: calc(100% - 1rem);
+      box-shadow: inset 0px 0px 5px #c9c7b652;
+      border: 1px solid #ece9ce;
+      padding: 0.5rem 0.75rem;
+      margin: 1rem 0;
+      border-radius: 0.7rem;
+    }
+
+    label {
+      margin-bottom: 0.5rem;
+    }
+
+    button {
+      border: 1px solid #38bcac;
+      border-radius: 0.25rem;
+      display: inline-block;
+      cursor: pointer;
+      -webkit-appearance: none;
+      padding: 0.75rem 2rem;
+      font-family: inherit;
+      background-color: #bfe8e3;
+      color: #168d7e;
+    }
+
+    button.button,
+    .button[role="button"],
+    input.button[type="submit"] {
+      background-color: #efefef;
+      color: white;
+      padding: 0.5em 1.5em;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="fill">
+    <div class="gutter">
+      <h1>Net Effective Rent Calculator</h1>
+      <p>Calculates your actual monthly rent based on the net effective rate. Enter the advertised rent, the number of months
+        paid and the number of months free, and we generate your actual rent.</p>
+      <hr/>
+      <h3>Actual Rent:<span id="answer"></span></h3>
+      <label for="rent">Monthly Rent</label>
+      <input type="text" placeholder="2400" id="rent" onChange="onChange()" />
+      <label for="lease">Lease term</label>
+      <input type="text" placeholder="12" id="lease" onChange="onChange()" />
+      <label for="free"># of months free</label>
+      <input type="text" placeholder="1" id="free" onChange="onChange()" />
+      <button id="calc">Calculate</button>
+    </div>
+  </div>
+</body>
+<script>
+  onChange = () => {
+    const rent = parseInt(document.getElementById("rent").value)
+    const lease = parseInt(document.getElementById("lease").value)
+    const free = parseInt(document.getElementById("free").value)
+    const answer = document.getElementById("answer")
+
+    if (lease && free && rent) {
+      answer.innerHTML = Math.ceil(((lease + free) * rent) / lease)
+    }
+  }
+</script>
+
+</html>
